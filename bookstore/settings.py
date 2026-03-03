@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2lldutt=1ag3*of@)b45=lm6bj!j!u4#laez%9+2sci2c7d&8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["tainistranits-production.up.railway.app"]
 
 
 # Application definition
@@ -133,6 +133,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 AUTH_USER_MODEL = 'catalog.User'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
