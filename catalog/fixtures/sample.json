@@ -1,0 +1,1412 @@
+[
+{
+  "model": "catalog.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$iTV7654BzFHaJCD27IJKzR$SFB8xXlX25J0Mmk63r8VEI+b3NQI8Qzx8+zC+my2J2Y=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admin",
+    "first_name": "Администратор",
+    "last_name": "системы",
+    "email": "admin@bookstore.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-09-15T16:58:18.451Z",
+    "role": "admin",
+    "phone": "+7 (495) 123-45-67",
+    "address": "ул. Книжная, д. 1, офис 101",
+    "city": "Москва",
+    "postal_code": "123456",
+    "country": "Россия"
+  }
+},
+{
+  "model": "catalog.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AvdVmXd39lrWjyGrOIGBU6$XFKpP7gbGudwM0uxNCVU2lbIuQevX5yDccaerPp9Muc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ivanov",
+    "first_name": "Иван",
+    "last_name": "Иванов",
+    "email": "ivanov@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-02-15T14:30:00Z",
+    "role": "user",
+    "phone": "+7 (916) 123-45-67",
+    "address": "ул. Читательская, д. 15, кв. 34",
+    "city": "Москва",
+    "postal_code": "123789",
+    "country": "Россия",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "catalog.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AvdVmXd39lrWjyGrOIGBU6$XFKpP7gbGudwM0uxNCVU2lbIuQevX5yDccaerPp9Muc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "petrov",
+    "first_name": "Петр",
+    "last_name": "Петров",
+    "email": "petrov@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-03-01T10:00:00Z",
+    "role": "user",
+    "phone": "+7 (917) 234-56-78",
+    "address": "ул. Пушкинская, д. 25, кв. 12",
+    "city": "Санкт-Петербург",
+    "postal_code": "198765",
+    "country": "Россия",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "catalog.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AvdVmXd39lrWjyGrOIGBU6$XFKpP7gbGudwM0uxNCVU2lbIuQevX5yDccaerPp9Muc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "sidorova",
+    "first_name": "Анна",
+    "last_name": "Сидорова",
+    "email": "sidorova@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-02-20T14:00:00Z",
+    "role": "user",
+    "phone": "+7 (921) 345-67-89",
+    "address": "пр-т Ленина, д. 45, кв. 89",
+    "city": "Екатеринбург",
+    "postal_code": "620000",
+    "country": "Россия",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "catalog.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$AvdVmXd39lrWjyGrOIGBU6$XFKpP7gbGudwM0uxNCVU2lbIuQevX5yDccaerPp9Muc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "smirnov",
+    "first_name": "Алексей",
+    "last_name": "Смирнов",
+    "email": "smirnov@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-01-15T09:00:00Z",
+    "role": "user",
+    "phone": "+7 (903) 456-78-90",
+    "address": "ул. Гагарина, д. 67, кв. 34",
+    "city": "Новосибирск",
+    "postal_code": "630000",
+    "country": "Россия",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Художественная литература",
+      "slug": "fiction",
+      "description": "Романы, повести, рассказы и другие произведения художественной литературы"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Фантастика",
+      "slug": "science-fiction",
+      "description": "Научная фантастика, фэнтези и другие жанры"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Детективы",
+      "slug": "detectives",
+      "description": "Детективные романы и триллеры"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Научная литература",
+      "slug": "science",
+      "description": "Научно-популярные книги и учебные пособия"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+      "name": "Бизнес-литература",
+      "slug": "business",
+      "description": "Книги по бизнесу, менеджменту и маркетингу"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+      "name": "Историческая литература",
+      "slug": "history",
+      "description": "Исторические романы, биографии, книги по истории"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+      "name": "Психология",
+      "slug": "psychology",
+      "description": "Книги по психологии, саморазвитию и личностному росту"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+      "name": "Кулинария",
+      "slug": "cooking",
+      "description": "Кулинарные книги, рецепты, книги о питании"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+      "name": "Детская литература",
+      "slug": "children",
+      "description": "Книги для детей и подростков"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 1,
+    "fields": {
+      "first_name": "Михаил",
+      "last_name": "Булгаков",
+      "bio": "Русский писатель, драматург, театральный режиссёр и актёр. Автор романов «Мастер и Маргарита», «Собачье сердце», «Белая гвардия».",
+      "birth_date": "1891-05-15",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 2,
+    "fields": {
+      "first_name": "Джордж",
+      "last_name": "Оруэлл",
+      "bio": "Английский писатель и публицист. Наиболее известен как автор культового антиутопического романа «1984» и повести «Скотный двор».",
+      "birth_date": "1903-06-25",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 3,
+    "fields": {
+      "first_name": "Фёдор",
+      "last_name": "Достоевский",
+      "bio": "Русский писатель, мыслитель, философ и публицист. Член-корреспондент Петербургской академии наук с 1877 года.",
+      "birth_date": "1821-11-11",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 4,
+    "fields": {
+      "first_name": "Агата",
+      "last_name": "Кристи",
+      "bio": "Английская писательница. Относится к числу самых известных в мире авторов детективной прозы.",
+      "birth_date": "1890-09-15",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 5,
+    "fields": {
+      "first_name": "Стивен",
+      "last_name": "Кинг",
+      "bio": "Американский писатель, работающий в разнообразных жанрах, включая ужасы, триллер, фантастика, фэнтези, мистика.",
+      "birth_date": "1947-09-21",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 6,
+    "fields": {
+      "first_name": "Джоан",
+      "last_name": "Роулинг",
+      "bio": "Британская писательница, наиболее известная как автор серии романов о Гарри Поттере.",
+      "birth_date": "1965-07-31",
+      "website": "https://www.jkrowling.com"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 7,
+    "fields": {
+      "first_name": "Харпер",
+      "last_name": "Ли",
+      "bio": "Американская писательница, наиболее известная своим романом «Убить пересмешника».",
+      "birth_date": "1926-04-28",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 8,
+    "fields": {
+      "first_name": "Рэй",
+      "last_name": "Брэдбери",
+      "bio": "Американский писатель, известный своими антиутопическими романами и рассказами в жанре научной фантастики.",
+      "birth_date": "1920-08-22",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 9,
+    "fields": {
+      "first_name": "Джейн",
+      "last_name": "Остин",
+      "bio": "Английская писательница, провозвестница реализма в британской литературе.",
+      "birth_date": "1775-12-16",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 10,
+    "fields": {
+      "first_name": "Джон",
+      "last_name": "Толкин",
+      "bio": "Английский писатель и филолог, наиболее известный как автор «Хоббита» и «Властелина колец».",
+      "birth_date": "1892-01-03",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 11,
+    "fields": {
+      "first_name": "Антуан",
+      "last_name": "де Сент-Экзюпери",
+      "bio": "Французский писатель, поэт и профессиональный лётчик.",
+      "birth_date": "1900-06-29",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 12,
+    "fields": {
+      "first_name": "Лев",
+      "last_name": "Толстой",
+      "bio": "Один из наиболее известных русских писателей и мыслителей, участник обороны Севастополя.",
+      "birth_date": "1828-09-09",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 13,
+    "fields": {
+      "first_name": "Николай",
+      "last_name": "Гоголь",
+      "bio": "Русский прозаик, драматург, поэт, критик, публицист, признанный одним из классиков русской литературы.",
+      "birth_date": "1809-04-01",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 14,
+    "fields": {
+      "first_name": "Эрих Мария",
+      "last_name": "Ремарк",
+      "bio": "Немецкий писатель XX века, представитель «потерянного поколения».",
+      "birth_date": "1898-06-22",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 15,
+    "fields": {
+      "first_name": "Габриэль",
+      "last_name": "Гарсиа Маркес",
+      "bio": "Колумбийский писатель-прозаик, журналист, издатель и политический деятель.",
+      "birth_date": "1927-03-06",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 16,
+    "fields": {
+      "first_name": "Эрнест",
+      "last_name": "Хемингуэй",
+      "bio": "Американский писатель, журналист, лауреат Нобелевской премии по литературе 1954 года.",
+      "birth_date": "1899-07-21",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 17,
+    "fields": {
+      "first_name": "Колин",
+      "last_name": "Маккалоу",
+      "bio": "Австралийская писательница, наиболее известная романом «Поющие в терновнике».",
+      "birth_date": "1937-06-01",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 18,
+    "fields": {
+      "first_name": "Дэн",
+      "last_name": "Браун",
+      "bio": "Американский писатель, журналист, музыкант. Автор бестселлеров в жанре детективного триллера.",
+      "birth_date": "1964-06-22",
+      "website": "https://danbrown.com"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 19,
+    "fields": {
+      "first_name": "Айн",
+      "last_name": "Рэнд",
+      "bio": "Американская писательница и философ, создательница философской системы объективизма.",
+      "birth_date": "1905-02-02",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 20,
+    "fields": {
+      "first_name": "Джером",
+      "last_name": "Дэвид Сэлинджер",
+      "bio": "Американский писатель, наиболее известный своим романом «Над пропастью во ржи».",
+      "birth_date": "1919-01-01",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 21,
+    "fields": {
+      "first_name": "Маргарет",
+      "last_name": "Митчелл",
+      "bio": "Американская писательница и журналистка, автор романа-бестселлера «Унесённые ветром».",
+      "birth_date": "1900-11-08",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 22,
+    "fields": {
+      "first_name": "Грегори",
+      "last_name": "Дэвид Робертс",
+      "bio": "Австралийский писатель, наиболее известный своим полуавтобиографическим романом «Шантарам».",
+      "birth_date": "1952-06-21",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 23,
+    "fields": {
+      "first_name": "Пауло",
+      "last_name": "Коэльо",
+      "bio": "Бразильский писатель и поэт. Опубликовал в общей сложности 30 книг.",
+      "birth_date": "1947-08-24",
+      "website": "https://paulocoelho.com"
+    }
+  },
+  {
+    "model": "catalog.author",
+    "pk": 24,
+    "fields": {
+      "first_name": "Эмили",
+      "last_name": "Бронте",
+      "bio": "Английская поэтесса и романистка, наиболее известная своим единственным романом «Грозовой перевал».",
+      "birth_date": "1818-07-30",
+      "website": ""
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 1,
+    "fields": {
+      "name": "Эксмо",
+      "address": "Москва, ул. Зорге, д. 1",
+      "website": "https://eksmo.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 2,
+    "fields": {
+      "name": "АСТ",
+      "address": "Москва, пр-т Мира, д. 106",
+      "website": "https://ast.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 3,
+    "fields": {
+      "name": "Питер",
+      "address": "Санкт-Петербург, ул. Благодатная, д. 67",
+      "website": "https://piter.com"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 4,
+    "fields": {
+      "name": "Манн, Иванов и Фербер",
+      "address": "Москва, ул. Шаболовка, д. 34",
+      "website": "https://mann-ivanov-ferber.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 5,
+    "fields": {
+      "name": "Росмэн",
+      "address": "Москва, ул. Шаболовка, д. 31",
+      "website": "https://rosman.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 6,
+    "fields": {
+      "name": "Азбука",
+      "address": "Санкт-Петербург, наб. реки Мойки, д. 40",
+      "website": "https://azbooka.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 7,
+    "fields": {
+      "name": "Рипол Классик",
+      "address": "Москва, ул. Правды, д. 24",
+      "website": "https://ripol.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 8,
+    "fields": {
+      "name": "Вече",
+      "address": "Москва, ул. Красной Сосны, д. 24",
+      "website": "https://veche.ru"
+    }
+  },
+  {
+    "model": "catalog.publisher",
+    "pk": 9,
+    "fields": {
+      "name": "Альпина Паблишер",
+      "address": "Москва, ул. Сретенка, д. 18/27",
+      "website": "https://alpinabook.ru"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 1,
+    "fields": {
+      "title": "Мастер и Маргарита",
+      "slug": "master-i-margarita",
+      "author": 1,
+      "publisher": 1,
+      "categories": [1],
+      "isbn": "9785170903165",
+      "description": "Один из самых загадочных и удивительных романов XX века. «Мастер и Маргарита» – лирико-философская поэма в прозе о любви и нравственном долге, о бессмертии и вечном движении жизни, о борьбе добра и зла, истины и лжи.",
+      "price": "599.00",
+      "stock_quantity": 10,
+      "created_at": "2023-01-10T09:15:00Z",
+      "updated_at": "2023-01-10T09:15:00Z",
+      "image": "covers/master_i_margarita.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 2,
+    "fields": {
+      "title": "1984",
+      "slug": "1984",
+      "author": 2,
+      "publisher": 2,
+      "categories": [1, 2],
+      "isbn": "9785170870481",
+      "description": "Своеобразный антипод второй великой антиутопии XX века – «О дивный новый мир» Олдоса Хаксли. Что, в сущности, страшнее: доведенное до абсурда «общество потребления» – или доведенное до абсолюта «общество идеи»?",
+      "price": "549.00",
+      "stock_quantity": 15,
+      "created_at": "2023-01-12T11:20:00Z",
+      "updated_at": "2023-01-12T11:20:00Z",
+      "image": "covers/1984.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 3,
+    "fields": {
+      "title": "Преступление и наказание",
+      "slug": "prestuplenie-i-nakazanie",
+      "author": 3,
+      "publisher": 1,
+      "categories": [1],
+      "isbn": "9785170902342",
+      "description": "«Преступление и наказание» (1866) — роман об одном преступлении. Но это не просто «уголовный роман», в основе которого лежит история убийства. Двойное убийство, совершенное бедным студентом Раскольниковым.",
+      "price": "489.00",
+      "stock_quantity": 8,
+      "created_at": "2023-01-15T14:45:00Z",
+      "updated_at": "2023-01-15T14:45:00Z",
+      "image": "covers/prestuplenie_i_nakazanie.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 4,
+    "fields": {
+      "title": "Убийство в Восточном экспрессе",
+      "slug": "ubijstvo-v-vostochnom-ekspresse",
+      "author": 4,
+      "publisher": 2,
+      "categories": [3],
+      "isbn": "9785170927659",
+      "description": "Один из самых знаменитых романов Агаты Кристи. Знаменитый сыщик Эркюль Пуаро расследует убийство в поезде «Восточный экспресс», застрявшем в снежных заносах.",
+      "price": "429.00",
+      "stock_quantity": 12,
+      "created_at": "2023-01-20T16:30:00Z",
+      "updated_at": "2023-01-20T16:30:00Z",
+      "image": "covers/orient_express.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 5,
+    "fields": {
+      "title": "Оно",
+      "slug": "ono",
+      "author": 5,
+      "publisher": 1,
+      "categories": [1, 2],
+      "isbn": "9785170934565",
+      "description": "Самый известный роман Стивена Кинга. История семи друзей, которые в детстве столкнулись с древним злом, а спустя годы вынуждены вернуться в родной город, чтобы снова сразиться с ним.",
+      "price": "699.00",
+      "stock_quantity": 6,
+      "created_at": "2023-01-25T13:10:00Z",
+      "updated_at": "2023-01-25T13:10:00Z",
+      "image": "covers/it.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 6,
+    "fields": {
+      "title": "Гарри Поттер и философский камень",
+      "slug": "harry-potter-philosophers-stone",
+      "author": 6,
+      "publisher": 5,
+      "categories": [2, 9],
+      "isbn": "9781781100219",
+      "description": "Первая книга из серии о юном волшебнике Гарри Поттере. История начинается с его одиннадцатого дня рождения, когда он узнает, что является волшебником.",
+      "price": "799.00",
+      "stock_quantity": 25,
+      "created_at": "2023-02-01T10:00:00Z",
+      "updated_at": "2023-02-01T10:00:00Z",
+      "image": "covers/harry_potter_1.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 7,
+    "fields": {
+      "title": "Убить пересмешника",
+      "slug": "to-kill-a-mockingbird",
+      "author": 7,
+      "publisher": 6,
+      "categories": [1],
+      "isbn": "9780099466734",
+      "description": "Роман о расовой несправедливости и утрате детской невинности в вымышленном городе Мейкомб в Алабаме.",
+      "price": "659.00",
+      "stock_quantity": 18,
+      "created_at": "2023-02-05T11:30:00Z",
+      "updated_at": "2023-02-05T11:30:00Z",
+      "image": "covers/to_kill_a_mockingbird.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 8,
+    "fields": {
+      "title": "451 градус по Фаренгейту",
+      "slug": "fahrenheit-451",
+      "author": 8,
+      "publisher": 2,
+      "categories": [1, 2],
+      "isbn": "9781451673319",
+      "description": "Антиутопический роман о обществе, где книги запрещены и подлежат сожжению пожарными.",
+      "price": "589.00",
+      "stock_quantity": 14,
+      "created_at": "2023-02-10T14:15:00Z",
+      "updated_at": "2023-02-10T14:15:00Z",
+      "image": "covers/fahrenheit_451.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 9,
+    "fields": {
+      "title": "Гордость и предубеждение",
+      "slug": "pride-and-prejudice",
+      "author": 9,
+      "publisher": 6,
+      "categories": [1],
+      "isbn": "9780141439518",
+      "description": "Классический роман о любви и социальных отношениях в Англии начала XIX века.",
+      "price": "499.00",
+      "stock_quantity": 22,
+      "created_at": "2023-02-15T09:45:00Z",
+      "updated_at": "2023-02-15T09:45:00Z",
+      "image": "covers/pride_and_prejudice.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 10,
+    "fields": {
+      "title": "Властелин колец",
+      "slug": "lord-of-the-rings",
+      "author": 10,
+      "publisher": 7,
+      "categories": [2],
+      "isbn": "9780261103257",
+      "description": "Эпическая фэнтези-трилогия о борьбе за Кольцо Всевластия в мире Средиземья.",
+      "price": "1299.00",
+      "stock_quantity": 8,
+      "created_at": "2023-02-20T13:20:00Z",
+      "updated_at": "2023-02-20T13:20:00Z",
+      "image": "covers/lord_of_the_rings.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 11,
+    "fields": {
+      "title": "Маленький принц",
+      "slug": "the-little-prince",
+      "author": 11,
+      "publisher": 8,
+      "categories": [1, 9],
+      "isbn": "9780156012195",
+      "description": "Философская сказка о маленьком мальчике с другой планеты, который путешествует по Вселенной.",
+      "price": "399.00",
+      "stock_quantity": 30,
+      "created_at": "2023-02-25T16:10:00Z",
+      "updated_at": "2023-02-25T16:10:00Z",
+      "image": "covers/little_prince.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 12,
+    "fields": {
+      "title": "Война и мир",
+      "slug": "war-and-peace",
+      "author": 12,
+      "publisher": 1,
+      "categories": [1, 6],
+      "isbn": "9780199232765",
+      "description": "Эпический роман, охватывающий период наполеоновских войн и жизнь русского дворянства.",
+      "price": "899.00",
+      "stock_quantity": 12,
+      "created_at": "2023-03-01T10:30:00Z",
+      "updated_at": "2023-03-01T10:30:00Z",
+      "image": "covers/war_and_peace.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 13,
+    "fields": {
+      "title": "Анна Каренина",
+      "slug": "anna-karenina",
+      "author": 12,
+      "publisher": 2,
+      "categories": [1],
+      "isbn": "9780199232766",
+      "description": "Трагическая история любви замужней женщины Анны Карениной к офицеру Вронскому.",
+      "price": "749.00",
+      "stock_quantity": 15,
+      "created_at": "2023-03-05T14:00:00Z",
+      "updated_at": "2023-03-05T14:00:00Z",
+      "image": "covers/anna_karenina.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 14,
+    "fields": {
+      "title": "Мертвые души",
+      "slug": "dead-souls",
+      "author": 13,
+      "publisher": 6,
+      "categories": [1],
+      "isbn": "9780199536758",
+      "description": "Сатирический роман о афере с покупкой умерших крепостных крестьян.",
+      "price": "549.00",
+      "stock_quantity": 20,
+      "created_at": "2023-03-10T11:45:00Z",
+      "updated_at": "2023-03-10T11:45:00Z",
+      "image": "covers/dead_souls.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 15,
+    "fields": {
+      "title": "Три товарища",
+      "slug": "three-comrades",
+      "author": 14,
+      "publisher": 7,
+      "categories": [1],
+      "isbn": "9780449912423",
+      "description": "Роман о дружбе и любви трех друзей в Германии после Первой мировой войны.",
+      "price": "689.00",
+      "stock_quantity": 16,
+      "created_at": "2023-03-15T09:30:00Z",
+      "updated_at": "2023-03-15T09:30:00Z",
+      "image": "covers/three_comrades.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 16,
+    "fields": {
+      "title": "Сто лет одиночества",
+      "slug": "one-hundred-years-of-solitude",
+      "author": 15,
+      "publisher": 9,
+      "categories": [1, 2],
+      "isbn": "9780060883287",
+      "description": "Эпическое произведение о семье Буэндиа и вымышленном городе Макондо.",
+      "price": "799.00",
+      "stock_quantity": 10,
+      "created_at": "2023-03-20T13:15:00Z",
+      "updated_at": "2023-03-20T13:15:00Z",
+      "image": "covers/one_hundred_years.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 17,
+    "fields": {
+      "title": "Старик и море",
+      "slug": "the-old-man-and-the-sea",
+      "author": 16,
+      "publisher": 2,
+      "categories": [1],
+      "isbn": "9780684801223",
+      "description": "Повесть о старом кубинском рыбаке и его борьбе с гигантской рыбой.",
+      "price": "429.00",
+      "stock_quantity": 25,
+      "created_at": "2023-03-25T15:40:00Z",
+      "updated_at": "2023-03-25T15:40:00Z",
+      "image": "covers/old_man_and_sea.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 18,
+    "fields": {
+      "title": "Поющие в терновнике",
+      "slug": "the-thorn-birds",
+      "author": 17,
+      "publisher": 8,
+      "categories": [1],
+      "isbn": "9780380018178",
+      "description": "Семейная сага о жизни нескольких поколений семьи Клири в Австралии.",
+      "price": "759.00",
+      "stock_quantity": 18,
+      "created_at": "2023-04-01T10:20:00Z",
+      "updated_at": "2023-04-01T10:20:00Z",
+      "image": "covers/thorn_birds.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 19,
+    "fields": {
+      "title": "Код да Винчи",
+      "slug": "the-da-vinci-code",
+      "author": 18,
+      "publisher": 1,
+      "categories": [1, 3],
+      "isbn": "9780307474278",
+      "description": "Детективный триллер о тайнах Леонардо да Винчи и религиозных заговорах.",
+      "price": "699.00",
+      "stock_quantity": 22,
+      "created_at": "2023-04-05T14:50:00Z",
+      "updated_at": "2023-04-05T14:50:00Z",
+      "image": "covers/da_vinci_code.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 20,
+    "fields": {
+      "title": "Атлант расправил плечи",
+      "slug": "atlas-shrugged",
+      "author": 19,
+      "publisher": 9,
+      "categories": [1, 5],
+      "isbn": "9780452011878",
+      "description": "Философский роман о роли разума в человеческой жизни и обществе.",
+      "price": "999.00",
+      "stock_quantity": 9,
+      "created_at": "2023-04-10T11:10:00Z",
+      "updated_at": "2023-04-10T11:10:00Z",
+      "image": "covers/atlas_shrugged.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 21,
+    "fields": {
+      "title": "Над пропастью во ржи",
+      "slug": "the-catcher-in-the-rye",
+      "author": 20,
+      "publisher": 6,
+      "categories": [1],
+      "isbn": "9780316769174",
+      "description": "Роман о подростковом бунте и поиске себя в современном мире.",
+      "price": "579.00",
+      "stock_quantity": 21,
+      "created_at": "2023-04-15T13:30:00Z",
+      "updated_at": "2023-04-15T13:30:00Z",
+      "image": "covers/catcher_in_the_rye.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 22,
+    "fields": {
+      "title": "Унесенные ветром",
+      "slug": "gone-with-the-wind",
+      "author": 21,
+      "publisher": 7,
+      "categories": [1, 6],
+      "isbn": "9781416548942",
+      "description": "Исторический роман о жизни на Юге США во время Гражданской войны.",
+      "price": "849.00",
+      "stock_quantity": 14,
+      "created_at": "2023-04-20T16:25:00Z",
+      "updated_at": "2023-04-20T16:25:00Z",
+      "image": "covers/gone_with_the_wind.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 23,
+    "fields": {
+      "title": "Шантарам",
+      "slug": "shantaram",
+      "author": 22,
+      "publisher": 8,
+      "categories": [1],
+      "isbn": "9780312330521",
+      "description": "Автобиографический роман о жизни австралийского беглеца в Бомбее.",
+      "price": "899.00",
+      "stock_quantity": 11,
+      "created_at": "2023-04-25T10:45:00Z",
+      "updated_at": "2023-04-25T10:45:00Z",
+      "image": "covers/shantaram.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 24,
+    "fields": {
+      "title": "Алхимик",
+      "slug": "the-alchemist",
+      "author": 23,
+      "publisher": 9,
+      "categories": [1, 7],
+      "isbn": "9780061122415",
+      "description": "Философская притча о пастухе Сантьяго и его поисках своего предназначения.",
+      "price": "549.00",
+      "stock_quantity": 28,
+      "created_at": "2023-05-01T14:15:00Z",
+      "updated_at": "2023-05-01T14:15:00Z",
+      "image": "covers/alchemist.jpg"
+    }
+  },
+  {
+    "model": "catalog.book",
+    "pk": 25,
+    "fields": {
+      "title": "Грозовой перевал",
+      "slug": "wuthering-heights",
+      "author": 24,
+      "publisher": 6,
+      "categories": [1],
+      "isbn": "9780141439556",
+      "description": "Готический роман о страстной и трагической любви Хитклифа и Кэтрин.",
+      "price": "599.00",
+      "stock_quantity": 19,
+      "created_at": "2023-05-05T11:50:00Z",
+      "updated_at": "2023-05-05T11:50:00Z",
+      "image": "covers/wuthering_heights.jpg"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-03-01T10:30:00Z",
+      "updated_at": "2023-03-01T10:30:00Z",
+      "total_amount": "1148.00",
+      "status": "delivered",
+      "shipping_address": "Москва, ул. Читательская, д. 15, кв. 34",
+      "delivery_method": "delivery",
+      "delivery_cost": "300.00",
+      "total_price": "1448.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-03-05T14:20:00Z",
+      "updated_at": "2023-03-05T14:20:00Z",
+      "total_amount": "489.00",
+      "status": "processing",
+      "shipping_address": "Москва, ул. Читательская, д. 15, кв. 34",
+      "delivery_method": "pickup",
+      "delivery_cost": "0.00",
+      "total_price": "489.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-03-10T09:45:00Z",
+      "updated_at": "2023-03-10T09:45:00Z",
+      "total_amount": "429.00",
+      "status": "shipped",
+      "shipping_address": "Москва, ул. Книжная, д. 5, кв. 12",
+      "delivery_method": "delivery",
+      "delivery_cost": "250.00",
+      "total_price": "679.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 4,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-03-15T16:10:00Z",
+      "updated_at": "2023-03-15T16:10:00Z",
+      "total_amount": "1398.00",
+      "status": "pending",
+      "shipping_address": "Москва, пр-т Мира, д. 45, кв. 78",
+      "delivery_method": "delivery",
+      "delivery_cost": "300.00",
+      "total_price": "1698.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 5,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-03-20T11:30:00Z",
+      "updated_at": "2023-03-20T11:30:00Z",
+      "total_amount": "699.00",
+      "status": "cancelled",
+      "shipping_address": "Москва, ул. Литературная, д. 23, кв. 56",
+      "delivery_method": "pickup",
+      "delivery_cost": "0.00",
+      "total_price": "699.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 6,
+    "fields": {
+      "user": 6,
+      "created_at": "2023-05-01T12:30:00Z",
+      "updated_at": "2023-05-01T12:30:00Z",
+      "total_amount": "1998.00",
+      "status": "delivered",
+      "shipping_address": "Санкт-Петербург, ул. Пушкинская, д. 25, кв. 12",
+      "delivery_method": "delivery",
+      "delivery_cost": "300.00",
+      "total_price": "2298.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "created_at": "2023-05-05T15:45:00Z",
+      "updated_at": "2023-05-05T15:45:00Z",
+      "total_amount": "1248.00",
+      "status": "processing",
+      "shipping_address": "Екатеринбург, пр-т Ленина, д. 45, кв. 89",
+      "delivery_method": "pickup",
+      "delivery_cost": "0.00",
+      "total_price": "1248.00"
+    }
+  },
+  {
+    "model": "catalog.order",
+    "pk": 8,
+    "fields": {
+      "user": 8,
+      "created_at": "2023-05-10T10:20:00Z",
+      "updated_at": "2023-05-10T10:20:00Z",
+      "total_amount": "1947.00",
+      "status": "shipped",
+      "shipping_address": "Новосибирск, ул. Гагарина, д. 67, кв. 34",
+      "delivery_method": "delivery",
+      "delivery_cost": "350.00",
+      "total_price": "2297.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 1,
+    "fields": {
+      "order": 1,
+      "book": 1,
+      "quantity": 1,
+      "price": "599.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 2,
+    "fields": {
+      "order": 1,
+      "book": 2,
+      "quantity": 1,
+      "price": "549.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 3,
+    "fields": {
+      "order": 2,
+      "book": 3,
+      "quantity": 1,
+      "price": "489.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 4,
+    "fields": {
+      "order": 3,
+      "book": 4,
+      "quantity": 1,
+      "price": "429.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 5,
+    "fields": {
+      "order": 4,
+      "book": 5,
+      "quantity": 2,
+      "price": "699.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 6,
+    "fields": {
+      "order": 6,
+      "book": 6,
+      "quantity": 1,
+      "price": "799.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 7,
+    "fields": {
+      "order": 6,
+      "book": 7,
+      "quantity": 1,
+      "price": "659.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 8,
+    "fields": {
+      "order": 6,
+      "book": 8,
+      "quantity": 1,
+      "price": "589.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 9,
+    "fields": {
+      "order": 7,
+      "book": 10,
+      "quantity": 1,
+      "price": "1299.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 10,
+    "fields": {
+      "order": 8,
+      "book": 11,
+      "quantity": 2,
+      "price": "399.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 11,
+    "fields": {
+      "order": 8,
+      "book": 12,
+      "quantity": 1,
+      "price": "899.00"
+    }
+  },
+  {
+    "model": "catalog.orderitem",
+    "pk": 12,
+    "fields": {
+      "order": 8,
+      "book": 13,
+      "quantity": 1,
+      "price": "749.00"
+    }
+  },
+  {
+    "model": "catalog.cart",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "created_at": "2023-03-10T15:45:00Z",
+      "updated_at": "2023-03-10T15:45:00Z"
+    }
+  },
+  {
+    "model": "catalog.cart",
+    "pk": 2,
+    "fields": {
+      "user": 6,
+      "created_at": "2023-05-12T14:30:00Z",
+      "updated_at": "2023-05-12T14:30:00Z"
+    }
+  },
+  {
+    "model": "catalog.cart",
+    "pk": 3,
+    "fields": {
+      "user": 7,
+      "created_at": "2023-05-15T11:20:00Z",
+      "updated_at": "2023-05-15T11:20:00Z"
+    }
+  },
+  {
+    "model": "catalog.cart",
+    "pk": 4,
+    "fields": {
+      "user": 8,
+      "created_at": "2023-05-18T09:45:00Z",
+      "updated_at": "2023-05-18T09:45:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 1,
+    "fields": {
+      "cart": 1,
+      "book": 3,
+      "quantity": 2,
+      "added_at": "2023-03-10T15:45:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 2,
+    "fields": {
+      "cart": 1,
+      "book": 1,
+      "quantity": 1,
+      "added_at": "2023-03-11T10:20:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 3,
+    "fields": {
+      "cart": 1,
+      "book": 4,
+      "quantity": 1,
+      "added_at": "2023-03-12T14:35:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 4,
+    "fields": {
+      "cart": 1,
+      "book": 2,
+      "quantity": 1,
+      "added_at": "2023-03-13T16:50:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 5,
+    "fields": {
+      "cart": 1,
+      "book": 5,
+      "quantity": 1,
+      "added_at": "2023-03-14T09:15:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 6,
+    "fields": {
+      "cart": 2,
+      "book": 9,
+      "quantity": 1,
+      "added_at": "2023-05-12T14:30:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 7,
+    "fields": {
+      "cart": 2,
+      "book": 10,
+      "quantity": 1,
+      "added_at": "2023-05-13T10:15:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 8,
+    "fields": {
+      "cart": 2,
+      "book": 11,
+      "quantity": 2,
+      "added_at": "2023-05-14T16:40:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 9,
+    "fields": {
+      "cart": 3,
+      "book": 12,
+      "quantity": 1,
+      "added_at": "2023-05-15T11:20:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 10,
+    "fields": {
+      "cart": 3,
+      "book": 13,
+      "quantity": 1,
+      "added_at": "2023-05-16T13:55:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 11,
+    "fields": {
+      "cart": 3,
+      "book": 14,
+      "quantity": 1,
+      "added_at": "2023-05-17T15:30:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 12,
+    "fields": {
+      "cart": 4,
+      "book": 15,
+      "quantity": 1,
+      "added_at": "2023-05-18T09:45:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 13,
+    "fields": {
+      "cart": 4,
+      "book": 16,
+      "quantity": 1,
+      "added_at": "2023-05-19T12:10:00Z"
+    }
+  },
+  {
+    "model": "catalog.cartitem",
+    "pk": 14,
+    "fields": {
+      "cart": 4,
+      "book": 17,
+      "quantity": 1,
+      "added_at": "2023-05-20T14:25:00Z"
+    }
+  }
+]

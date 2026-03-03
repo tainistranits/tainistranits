@@ -1,0 +1,312 @@
+{% extends 'admin/base.html' %}
+
+{% block page_title %}Управление категориями{% endblock %}
+
+{% block page_actions %}
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+    <i class="fas fa-plus"></i> Добавить категорию
+</button>
+{% endblock %}
+
+{% block content %}
+<!-- Таблица категорий -->
+<div class="card admin-table">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Название</th>
+                        <th>Slug</th>
+                        <th>Количество книг</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.slug }}</td>
+                        <td>
+                            <span class="badge bg-primary">{{ category.book_count }}</span>
+                        </td>
+                        <td>
+                            <a href="{% url 'admin_category_delete' category.id %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center py-4">Категории не найдены</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно добавления категории -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Добавить категорию</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" class="admin-form" id="categoryForm">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Название *</label>
+                                <input type="text" name="name" class="form-control" id="categoryName" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Slug *</label>
+                                <div class="input-group">
+                                    <input type="text" name="slug" class="form-control" id="categorySlug" required>
+                                    <button type="button" class="btn btn-outline-secondary" id="generateCategorySlug">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Slug создается автоматически из названия</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Описание</label>
+                        <textarea name="description" class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div class="d-flex gap-2 pt-3 border-top">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle me-2"></i>Добавить категорию
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .admin-form .modal-content {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .admin-form .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 12px 12px 0 0;
+        border: none;
+        padding: 20px 25px;
+    }
+    
+    .admin-form .modal-title {
+        font-weight: 600;
+        font-size: 1.25rem;
+    }
+    
+    .admin-form .modal-body {
+        padding: 25px;
+    }
+    
+    .admin-form .btn-close {
+        filter: invert(1);
+        opacity: 0.8;
+    }
+    
+    .admin-form .btn-close:hover {
+        opacity: 1;
+    }
+    
+    .admin-form .form-label {
+        font-weight: 500;
+        color: #495057;
+        margin-bottom: 0.5rem;
+    }
+    
+    .admin-form .form-control {
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 0.75rem;
+        transition: all 0.2s ease;
+    }
+    
+    .admin-form .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+    }
+    
+    .admin-form textarea.form-control {
+        resize: vertical;
+        min-height: 100px;
+    }
+    
+    .admin-form .border-top {
+        border-color: #e2e8f0 !important;
+        padding-top: 20px;
+    }
+    
+    .admin-form .btn {
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .admin-form .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+    }
+    
+    .admin-form .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .admin-form .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+    
+    .admin-form .btn-secondary:hover {
+        background-color: #5a6268;
+        transform: translateY(-1px);
+    }
+    
+    .admin-form .btn-outline-secondary {
+        border-radius: 0 8px 8px 0;
+    }
+    
+    /* Анимация модального окна */
+    .modal.fade .modal-dialog {
+        transform: translateY(-50px);
+        transition: transform 0.3s ease-out;
+    }
+    
+    .modal.show .modal-dialog {
+        transform: translateY(0);
+    }
+    
+    .btn {
+        border-radius: 6px;
+        padding: 0.625rem 1.25rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+    }
+    
+    .form-text {
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+    }
+</style>
+
+<script>
+// Функция для создания slug с транслитерацией
+function createSlug(text) {
+    const ruToEnMap = {
+        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
+        'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+        'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts',
+        'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
+        'я': 'ya'
+    };
+
+    let slug = text
+        .toLowerCase() // 1. Приводим к нижнему регистру
+        .trim() // 2. Убираем пробелы в начале и конце
+        // 3. Транслитерируем русские буквы
+        .split('') // Разбиваем на массив символов
+        .map(char => ruToEnMap[char] || char) // Заменяем русские буквы на латиницу, остальные оставляем
+        .join(''); // Собираем обратно в строку
+
+    // Теперь работаем с латиницей
+    slug = slug
+        .replace(/[^a-z0-9\s-]/g, '') // Удаляем спецсимволы, оставляем буквы (англ), цифры, пробелы и дефисы
+        .replace(/[\s]+/g, '-') // Заменяем пробелы на дефисы
+        .replace(/[-]+/g, '-') // Убираем повторяющиеся дефисы
+        .replace(/^-+|-+$/g, ''); // Убираем дефисы в начале и конце
+
+    return slug;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Элементы формы категории
+    const nameInput = document.getElementById('categoryName');
+    const slugInput = document.getElementById('categorySlug');
+    const generateSlugBtn = document.getElementById('generateCategorySlug');
+    
+    let isSlugManual = false;
+    
+    // Отслеживаем ручное изменение slug
+    if (slugInput) {
+        slugInput.addEventListener('input', function() {
+            isSlugManual = true;
+        });
+    }
+    
+    // Автоматическое обновление slug при вводе названия
+    if (nameInput && slugInput) {
+        nameInput.addEventListener('input', function() {
+            if (!isSlugManual) {
+                slugInput.value = createSlug(nameInput.value);
+            }
+        });
+    }
+    
+    // Кнопка для перегенерации slug
+    if (generateSlugBtn) {
+        generateSlugBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (nameInput.value) {
+                slugInput.value = createSlug(nameInput.value);
+                isSlugManual = false;
+            }
+        });
+    }
+    
+    // Обновляем slug при открытии модального окна, если название уже есть
+    document.getElementById('addCategoryModal').addEventListener('show.bs.modal', function() {
+        if (nameInput && nameInput.value && slugInput && !slugInput.value) {
+            slugInput.value = createSlug(nameInput.value);
+            isSlugManual = false;
+        }
+    });
+    
+    // Сброс при закрытии модального окна
+    document.getElementById('addCategoryModal').addEventListener('hidden.bs.modal', function() {
+        const form = document.getElementById('categoryForm');
+        form.reset();
+        isSlugManual = false;
+    });
+    
+    // Очистка slug при отправке формы
+    document.getElementById('categoryForm').addEventListener('submit', function(e) {
+        if (slugInput.value) {
+            slugInput.value = createSlug(slugInput.value);
+        }
+    });
+});
+
+// Функция для подтверждения удаления
+function confirmDelete(message) {
+    return confirm(message || 'Вы уверены, что хотите удалить эту категорию?');
+}
+</script>
+{% endblock %}
