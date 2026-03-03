@@ -1,0 +1,434 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="bookstore/">
+    <title>{% block title %}Тайны страниц{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+    <style>
+        .book-card {
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .book-image {
+            height: 250px;
+            object-fit: cover;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        /* Адаптивная навигация */
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Счетчик корзины */
+        .cart-badge {
+            font-size: 0.7em;
+            padding: 0.25em 0.5em;
+            margin-left: 0.3rem;
+        }
+
+        /* Новые стили для улучшенного футера */
+        .footer-contact-section {
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-title {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: #fff;
+        }
+
+        .contact-value {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-value:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            padding: 1.5rem 0;
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+
+            .navbar-collapse {
+                background-color: #343a40;
+                padding: 0.5rem;
+                border-radius: 0.25rem;
+                margin-top: 0.5rem;
+            }
+
+            .nav-link {
+                padding: 0.8rem 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            /* Убедимся, что текст виден на мобильных */
+            .nav-link span {
+                display: inline !important;
+            }
+
+            /* Адаптивность для контактов в футере */
+            .contact-item {
+                justify-content: center;
+                text-align: center;
+                flex-direction: column;
+            }
+
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 40px 0;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 0.7rem 0.9rem;
+            }
+
+            .nav-link i {
+                width: 18px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .nav-link {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-link i {
+                width: 16px;
+                margin-right: 0.4rem;
+            }
+
+            .navbar-brand {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-book"></i>
+                <span>Тайны страниц</span>
+            </a>
+
+            <!-- Кнопка гамбургер-меню для мобильных -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Переключить навигацию">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Содержимое навигации -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{% url 'home' %}">
+                        <i class="fas fa-home"></i>
+                        <span>Главная</span>
+                    </a>
+
+                    {% if user.is_admin %}
+                    <a class="nav-link" href="{% url 'admin_statistics' %}">
+                        <i class="fas fa-cog"></i>
+                        <span>Админ-панель</span>
+                    </a>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'profile' %}">
+                        <i class="fas fa-user"></i>
+                        <span>Профиль</span>
+                    </a>
+
+                    <a class="nav-link" href="{% url 'cart' %}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Корзина</span>
+                        {% if cart_total_items > 0 %}
+                        <span class="badge bg-primary cart-badge">{{ cart_total_items }}</span>
+                        {% endif %}
+                    </a>
+                    <a href="{% url 'logout' %}" class="nav-link">
+                        <i class="fas fa-sign-out me-1"></i>
+                        <span>Выйти</span>
+                    </a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'login' %}">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Войти</span>
+                    </a>
+
+                    <a class="nav-link" href="{% url 'register' %}">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Регистрация</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основное содержимое -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Улучшенный футер -->
+    <footer class="footer bg-dark text-white mt-5">
+        <div class="footer-contact-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <div class="contact-title">Телефон</div>
+                                <a href="tel:+79516751477" class="contact-value">+7 (951) 675-14-77</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <div class="contact-title">Email</div>
+                                <a href="mailto:bookstore@mail.ru" class="contact-value">bookstore@mail.ru</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <div class="contact-title">Адрес</div>
+                                <span class="contact-value">г. Курск, проспект Анатолия Дериглазова, 33</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container text-center">
+                <p class="mb-0">&copy; 2025 Тайны страниц. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Базовые функции JavaScript для взаимодействия с API
+        const API_BASE = '/api/';
+
+        async function addToCart(bookId, quantity = 1) {
+            try {
+                console.log('Adding to cart:', bookId, quantity);
+
+                const response = await fetch(`/web/cart/add/${bookId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    body: JSON.stringify({ quantity: quantity })
+                });
+
+                // Проверяем статус ответа
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Response:', data);
+
+                if (data.success) {
+                    // Обновляем счетчик корзины
+                    updateCartCounter(data.cart_total);
+
+                    // Показываем уведомление
+                    showNotification(data.message, 'success');
+                } else {
+                    showNotification(data.message || 'Ошибка при добавлении в корзину', 'error');
+                }
+            } catch (error) {
+                console.error('Error adding to cart:', error);
+                showNotification('Ошибка при добавлении в корзину', 'error');
+            }
+        }
+
+        function updateCartCounter(count) {
+            const counter = document.querySelector('.cart-badge');
+            if (counter) {
+                counter.textContent = count;
+                if (count > 0) {
+                    counter.style.display = 'inline';
+                } else {
+                    counter.style.display = 'none';
+                }
+            }
+        }
+
+        // Показать уведомление
+        function showNotification(message, type = 'info') {
+            // Создаем элемент уведомления
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alert.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 300px;';
+            alert.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+
+            document.body.appendChild(alert);
+
+            // Автоматическое скрытие через 3 секунды
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.parentNode.removeChild(alert);
+                }
+            }, 3000);
+        }
+
+        // Вспомогательная функция для получения CSRF токена
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Автоматическое закрытие мобильного меню при клике на пункт
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navbarCollapse = document.getElementById('navbarContent');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 768) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                            toggle: false
+                        });
+                        bsCollapse.hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
