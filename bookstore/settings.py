@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ["tainistranits-production.up.railway.app"]
 
-CSRF_TRUSTED_ORIGINS = ["tainistranits-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://tainistranits-production.up.railway.app"]
 # Application definition
 
 INSTALLED_APPS = [
