@@ -1,6 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
+from .ai_views import AIRecommendationsAPIView
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
@@ -74,4 +75,7 @@ urlpatterns = [
     
     # Search
     path('api/search/', views.SearchAPIView.as_view(), name='search'),
+    path('api/ai/recommendations/', AIRecommendationsAPIView.as_view(), name='ai-recommendations'),
 ]
+
+

@@ -1,70 +1,195 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block title %}Главная - Тайны страниц{% endblock %}
 
 {% block content %}
-<!-- Герой секция -->
 <section class="hero-section mb-4">
     <div class="container text-center">
         <h1 class="display-5 fw-bold mb-3">Добро пожаловать в мир книг</h1>
         <p class="lead mb-4">Откройте для себя лучшие произведения от известных авторов</p>
-        
-        <!-- Поиск -->
+
         <div class="row justify-content-center">
-    <div class="col-12 col-md-8">
-        <div class="d-flex flex-column flex-md-row gap-2">
-            <!-- Форма поиска -->
-            <form method="get" action="{% url 'book_list' %}" class="d-flex flex-grow-1">
-                <input class="form-control me-2" type="search" name="search" 
-                    placeholder="Поиск книг по названию" 
-                    value="{{ request.GET.search }}"
-                    aria-label="Поиск книг">
-                <button class="btn btn-outline-white" type="submit">
-                    <i class="fas fa-search"></i> 
-                    <span class="d-none d-md-inline">Найти</span>
-                </button>
-            </form>
-            
-            <!-- Кнопка "Все книги" -->
-            <a href="{% url 'book_list' %}" class="btn btn-outline-white" style="padding: 20px;">
-                <i class="fas fa-book"></i>
-                <span class="d-none d-md-inline">Все книги</span>
-            </a>
-        </div>                    
+            <div class="col-12 col-md-8">
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <form method="get" action="{% url 'book_list' %}" class="d-flex flex-grow-1">
+                        <input class="form-control me-2" type="search" name="search"
+                               placeholder="Поиск книг по названию"
+                               value="{{ request.GET.search }}"
+                               aria-label="Поиск книг">
+                        <button class="btn btn-outline-white" type="submit">
+                            <i class="fas fa-search"></i>
+                            <span class="d-none d-md-inline">Найти</span>
+                        </button>
+                    </form>
+
+                    <a href="{% url 'book_list' %}" class="btn btn-outline-white" style="padding: 20px;">
+                        <i class="fas fa-book"></i>
+                        <span class="d-none d-md-inline">Все книги</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </section>
 
-<!-- Новые книги -->
+<section class="container py-4">
+    <div class="card ai-card shadow-sm border-0">
+        <div class="card-body p-4">
+            <div class="d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between mb-3">
+                <div>
+                    <h2 class="h4 mb-1">AI-подбор книг</h2>
+                    <p class="text-muted mb-0">Опишите, что хотите почитать, и мы подберем подходящие книги.</p>
+                </div>
+            </div>
+
+            <form id="ai-reco-form" class="d-flex flex-column flex-md-row gap-2">
+                <input
+                    id="ai-reco-input"
+                    class="form-control"
+                    type="text"
+                    placeholder="Например: современный детектив без мистики"
+                    aria-label="Запрос для AI-подбора"
+                    required
+                >
+                <button id="ai-reco-submit" class="btn btn-primary" type="submit">
+                    Подобрать
+                </button>
+            </form>
+
+            <div id="ai-reco-status" class="small text-muted mt-3" role="status" aria-live="polite"></div>
+
+            <div id="ai-reco-answer-wrap" class="alert alert-light border mt-3 d-none">
+                <div class="fw-semibold mb-1">Ответ AI</div>
+                <div id="ai-reco-answer"></div>
+            </div>
+
+            <div id="ai-reco-results" class="row g-3 mt-1"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function () {
+    const form = document.getElementById('ai-reco-form');
+    const input = document.getElementById('ai-reco-input');
+    const submitBtn = document.getElementById('ai-reco-submit');
+    const statusEl = document.getElementById('ai-reco-status');
+    const answerWrap = document.getElementById('ai-reco-answer-wrap');
+    const answerEl = document.getElementById('ai-reco-answer');
+    const resultsEl = document.getElementById('ai-reco-results');
+
+    if (!form) return;
+
+    function esc(text) {
+        const div = document.createElement('div');
+        div.textContent = text == null ? '' : String(text);
+        return div.innerHTML;
+    }
+
+    function renderResults(results) {
+        resultsEl.innerHTML = '';
+        if (!Array.isArray(results) || results.length === 0) {
+            resultsEl.innerHTML = '<div class="col-12"><div class="alert alert-warning mb-0">Подходящие книги не найдены.</div></div>';
+            return;
+        }
+
+        for (const book of results) {
+            const title = esc(book.title || 'Без названия');
+            const price = esc(book.price || '-');
+            const id = esc(book.id || '');
+            const image = book.image ? esc(book.image) : '';
+            const description = esc((book.description || '').slice(0, 180));
+
+            resultsEl.insertAdjacentHTML('beforeend', `
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        ${image ? `<img src="${image}" class="card-img-top" alt="${title}" style="height: 220px; object-fit: contain; padding: 12px;">` : ''}
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="h6 fw-bold mb-2">${title}</h3>
+                            <p class="small text-muted mb-3">${description || 'Описание отсутствует'}</p>
+                            <div class="mt-auto d-flex justify-content-between align-items-center">
+                                <span class="fw-semibold">${price} ₽</span>
+                                ${id ? `<a href="/books/${id}/" class="btn btn-sm btn-outline-primary">Открыть</a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+    }
+
+    async function loadRecommendations(query) {
+        const url = `{% url 'ai-recommendations' %}?q=${encodeURIComponent(query)}`;
+        const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!res.ok) {
+            throw new Error('Не удалось получить рекомендации.');
+        }
+        return res.json();
+    }
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const query = input.value.trim();
+        if (!query) {
+            statusEl.textContent = 'Введите запрос.';
+            return;
+        }
+
+        submitBtn.disabled = true;
+        statusEl.textContent = 'Подбираем книги...';
+        answerWrap.classList.add('d-none');
+        resultsEl.innerHTML = '';
+
+        try {
+            const data = await loadRecommendations(query);
+            const answer = (data && data.answer) ? String(data.answer) : 'Рекомендации готовы.';
+            answerEl.textContent = answer;
+            answerWrap.classList.remove('d-none');
+            renderResults(data && data.results ? data.results : []);
+
+            if (data && data.fallback_used) {
+                statusEl.textContent = 'AI временно недоступен. Показаны базовые результаты.';
+            } else {
+                statusEl.textContent = 'Готово.';
+            }
+        } catch (err) {
+            statusEl.textContent = err && err.message ? err.message : 'Произошла ошибка.';
+        } finally {
+            submitBtn.disabled = false;
+        }
+    });
+})();
+</script>
+
 <section class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="h3 mb-0">Новые поступления</h2>
     </div>
-    
+
     <div class="row g-4">
         {% for book in new_books %}
         <div class="col-6 col-md-4 col-lg-3">
             <div class="card h-100 book-card">
                 {% if book.image %}
-                <img src="{{ book.image.url }}" class="card-img-top book-image" alt="{{ book.title }}" 
+                <img src="{{ book.image.url }}" class="card-img-top book-image" alt="{{ book.title }}"
                      style="height: 280px; object-fit: contain; padding: 15px;">
                 {% else %}
-                <div class="card-img-top book-image bg-light d-flex align-items-center justify-content-center" 
+                <div class="card-img-top book-image bg-light d-flex align-items-center justify-content-center"
                      style="height: 280px;">
                     <i class="fas fa-book fa-3x text-muted"></i>
                 </div>
                 {% endif %}
-                
+
                 <div class="card-body d-flex flex-column">
                     <h6 class="card-title mb-2 fw-bold">{{ book.title|truncatewords:5 }}</h6>
                     <p class="card-text text-muted small mb-2">
                         <small>{{ book.author.first_name }} {{ book.author.last_name }}</small>
                     </p>
-                    
+
                     <p class="card-text small text-secondary mb-3 d-none d-md-block">
                         {{ book.description|truncatewords:12|default:"Описание отсутствует" }}
                     </p>
-                    
+
                     <div class="mt-auto">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="fw-bold text-primary h5 mb-0">{{ book.price }} ₽</span>
@@ -72,7 +197,7 @@
                                 {{ book.stock_quantity }} шт.
                             </span>
                         </div>
-                        
+
                         <div class="d-grid gap-2">
                             <a href="{% url 'book_detail' book.id %}" class="btn btn-outline-primary">
                                 <i class="fas fa-eye me-1"></i>Подробнее
@@ -95,36 +220,35 @@
     </div>
 </section>
 
-<!-- Популярные книги -->
 <section class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="h3 mb-0">Популярные книги</h2>
     </div>
-    
+
     <div class="row g-4">
         {% for book in popular_books %}
         <div class="col-6 col-md-4 col-lg-3">
             <div class="card h-100 book-card">
                 {% if book.image %}
-                <img src="{{ book.image.url }}" class="card-img-top book-image" alt="{{ book.title }}" 
+                <img src="{{ book.image.url }}" class="card-img-top book-image" alt="{{ book.title }}"
                      style="height: 280px; object-fit: contain; padding: 15px;">
                 {% else %}
-                <div class="card-img-top book-image bg-light d-flex align-items-center justify-content-center" 
+                <div class="card-img-top book-image bg-light d-flex align-items-center justify-content-center"
                      style="height: 280px;">
                     <i class="fas fa-book fa-3x text-muted"></i>
                 </div>
                 {% endif %}
-                
+
                 <div class="card-body d-flex flex-column">
                     <h6 class="card-title mb-2 fw-bold">{{ book.title|truncatewords:5 }}</h6>
                     <p class="card-text text-muted small mb-2">
                         <small>{{ book.author.first_name }} {{ book.author.last_name }}</small>
                     </p>
-                    
+
                     <p class="card-text small text-secondary mb-3 d-none d-md-block">
                         {{ book.description|truncatewords:12|default:"Описание отсутствует" }}
                     </p>
-                    
+
                     <div class="mt-auto">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="fw-bold text-primary h5 mb-0">{{ book.price }} ₽</span>
@@ -132,7 +256,7 @@
                                 {{ book.stock_quantity }} шт.
                             </span>
                         </div>
-                        
+
                         <div class="d-grid gap-2">
                             <a href="{% url 'book_detail' book.id %}" class="btn btn-outline-primary">
                                 <i class="fas fa-eye me-1"></i>Подробнее
@@ -154,8 +278,6 @@
         {% endfor %}
     </div>
 </section>
-
-
 
 <style>
     .hero-section {
@@ -163,120 +285,129 @@
         color: white;
         padding: 80px 0;
     }
-    
+
     .book-card {
         transition: transform 0.3s, box-shadow 0.3s;
         border: 1px solid #eee;
         border-radius: 12px;
         overflow: hidden;
     }
-    
+
     .book-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
-    
+
     .book-image {
         transition: transform 0.3s;
     }
-    
+
     .book-card:hover .book-image {
         transform: scale(1.05);
     }
-    
+
     .btn-outline-white {
         color: white;
         border-color: white;
         background: transparent;
     }
-    
+
     .btn-outline-white:hover {
         background-color: white;
         color: #667eea;
         border-color: white;
     }
-    
+
     .card-body {
         padding: 1.5rem;
     }
-    
-    /* Стили для десктопа */
+
+    .ai-card {
+        border-radius: 14px;
+    }
+
+    #ai-reco-results .card {
+        border-radius: 12px;
+    }
+
+    #ai-reco-answer-wrap {
+        background: #f8fbff;
+    }
+
     @media (min-width: 768px) {
         .book-card {
             min-height: 500px;
         }
-        
+
         .card-title {
             font-size: 1.1rem;
             min-height: 2.8rem;
         }
-        
+
         .btn {
             padding: 0.75rem 1rem;
         }
     }
-    
-    /* Стили для мобильных */
+
     @media (max-width: 767.98px) {
         .hero-section {
             padding: 50px 0;
         }
-        
+
         .display-5 {
             font-size: 2rem;
         }
-        
+
         .book-image {
             height: 200px !important;
             padding: 10px !important;
         }
-        
+
         .card-body {
             padding: 1rem;
         }
-        
+
         .card-title {
             font-size: 0.95rem;
             min-height: auto;
         }
-        
+
         .btn {
             padding: 0.5rem 0.75rem;
             font-size: 0.9rem;
         }
-        
+
         .h5 {
             font-size: 1.1rem;
         }
     }
-    
+
     @media (max-width: 575.98px) {
         .hero-section {
             padding: 40px 0;
         }
-        
+
         .display-5 {
             font-size: 1.75rem;
         }
-        
+
         .book-image {
             height: 180px !important;
             padding: 8px !important;
         }
-        
+
         .col-6 {
             padding: 0 8px;
         }
-        
+
         .card-body {
             padding: 0.8rem;
         }
-        
+
         .btn {
             padding: 0.4rem 0.6rem;
             font-size: 0.85rem;
         }
     }
 </style>
-
 {% endblock %}

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2lldutt=1ag3*of@)b45=lm6bj!j!u4#laez%9+2sci2c7d&8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["tainistranits-production.up.railway.app"]
+ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = ["https://tainistranits-production.up.railway.app"]
 # Application definition
@@ -159,3 +159,8 @@ EMAIL_HOST_PASSWORD = 'coth fdeu bgot wrvq'  # пароль приложения
 SITE_NAME = "Тайны страниц"
 DOMAIN = "localhost:8000"  # ваш домен
 DEFAULT_FROM_EMAIL = 'noreply@yourdomain.com'
+
+HF_TOKEN = os.getenv('HF_TOKEN', '')
+HF_CHAT_MODEL = os.getenv('HF_CHAT_MODEL', 'HuggingFaceTB/SmolLM2-1.7B-Instruct')
+HF_REQUEST_TIMEOUT = int(os.getenv('HF_REQUEST_TIMEOUT', '30'))
+
