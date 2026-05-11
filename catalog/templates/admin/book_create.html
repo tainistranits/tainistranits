@@ -1,13 +1,13 @@
 {% extends 'admin/base.html' %}
 
-{% block page_title %}{% if form.instance.id %}Редактирование книги{% else %}Добавить книгу{% endif %}{% endblock %}
+{% block page_title %}Добавить книгу{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h4>{% if form.instance.id %}Редактировать книгу{% else %}Добавить новую книгу{% endif %}</h4>
+                <h4>Добавить новую книгу</h4>
             </div>
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data" class="admin-form">
@@ -167,7 +167,7 @@
             <div class="mt-3 p-3 border rounded bg-light">
                 <h6 class="mb-2"><i class="fas fa-info-circle text-primary me-2"></i>Информация об изображении</h6>
                 <p class="small text-muted mb-0">
-                    Загрузка изображения не обязательна. Вы можете добавить его позже при редактировании книги.
+                    Загрузка изображения не обязательна. Вы можете добавить его позже.
                 </p>
             </div>
         </div>

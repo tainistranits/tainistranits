@@ -3,6 +3,10 @@
 {% block title %}Контакты - Тайны страниц{% endblock %}
 
 {% block content %}
+<style>
+    @import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+    #map { height: 400px; border-radius: 8px; }
+</style>
 <div class="container py-5">
     <h1 class="mb-4">Контакты</h1>
     
@@ -44,23 +48,12 @@
         </div>
         
         <div class="col-md-6 mb-4">
-<div class="card h-100">
+            <div class="card h-100">
                 <div class="card-body">
                     <h3 class="card-title mb-4">Как нас найти</h3>
-                    <div class="map-container" style="height: 400px; border-radius: 8px; overflow: hidden; background-color: #e8e8e8;">
-                        <a href="https://yandex.ru/maps/46/kursk/?ll=36.163604%2C51.812899&amp;z=16" target="_blank" style="display: block; height: 100%;">
-                            <img src="https://static-maps.yandex.ru/1.x/?ll=36.163604,51.812899&amp;z=16&amp;l=map&amp;size=650,450" 
-                                 alt="Карта Курска - Проспект Анатолия Дериглазова, 33"
-                                 style="width: 100%; height: 100%; object-fit: cover;">
-                        </a>
-                    </div>
+                    <div id="map" style="height: 400px; border-radius: 8px;"></div>
                     <p class="text-muted mt-3 text-center">
-                        <small>г. Курск, проспект Анатолия Дериглазова, 33 &nbsp;<a href="https://yandex.ru/maps/46/kursk/?ll=36.163604%2C51.812899&amp;z=16" target="_blank">Открыть на карте</a></small>
-                    </p>
-                </div>
-            </div>
-                    <p class="text-muted mt-3 text-center">
-                        <small>г. Курск, проспект Анатолия Дериглазова, 33</small>
+                        <small>г. Курск, проспект Анатолия Дериглазова, 33 &nbsp;<a href="https://yandex.ru/maps/46/kursk/?ll=36.163604%2C51.812899&amp;z=16" target="_blank">Открыть в Яндекс Картах</a></small>
                     </p>
                 </div>
             </div>
@@ -91,4 +84,19 @@
         </div>
     </div>
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var map = L.map('map').setView([51.812899, 36.163604], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18,
+    }).addTo(map);
+
+    L.marker([51.812899, 36.163604]).addTo(map)
+        .bindPopup('<b>Тайны страниц</b><br>проспект Анатолия Дериглазова, 33');
+});
+</script>
 {% endblock %}
