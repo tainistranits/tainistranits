@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q, Count, Prefetch, Sum
 from django.core.paginator import Paginator
-from .models import Book, Category, Author, Order, OrderItem, Cart, CartItem
-from .forms import LoginForm, RegisterForm, UserProfileForm, OrderForm, BookForm, CategoryForm, AuthorForm, PublisherForm
+from .models import Book, Category, Author, Order, OrderItem, Cart, CartItem, News
+from .forms import LoginForm, RegisterForm, UserProfileForm, OrderForm, BookForm, CategoryForm, AuthorForm, PublisherForm, NewsForm
 from django.contrib.auth.views import LoginView
 from django.contrib.admin.models import LogEntry
 from . serializers import *
@@ -718,6 +718,79 @@ def admin_publisher_delete(request, publisher_id):
         return redirect('admin_publishers')
     
     return render(request, 'admin/publisher_delete.html', {'publisher': publisher})
+
+def contacts(request):
+    return render(request, 'catalog/contacts.html')
+
+def news_list(request):
+    news_items = News.objects.filter(is_published=True).order_by('-created_at')
+    paginator = Paginator(news_items, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'catalog/news_list.html', {'page_obj': page_obj})
+
+def news_detail(request, slug):
+    news_item = get_object_or_404(News, slug=slug, is_published=True)
+    return render(request, 'catalog/news_detail.html', {'news': news_item})
+
+@admin_required
+def admin_news(request):
+    news_items = News.objects.all().order_by('-created_at')
+    context = {'news_items': news_items}
+    return render(request, 'admin/news.html', context)
+
+@admin_required
+def admin_news_create(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Новость успешно создана!')
+            return redirect('admin_news')
+    else:
+        form = NewsForm()
+    
+    context = {'form': form, 'is_new': True}
+    return render(request, 'admin/news_form.html', context)
+
+@admin_required
+def admin_news_detail(request, news_id):
+    news_item = get_object_or_404(News, id=news_id)
+    
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES, instance=news_item)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Новость успешно обновлена!')
+            return redirect('admin_news')
+    else:
+        form = NewsForm(instance=news_item)
+    
+    context = {'form': form, 'news': news_item, 'is_new': False}
+    return render(request, 'admin/news_form.html', context)
+
+@admin_required
+def admin_news_delete(request, news_id):
+    news_item = get_object_or_404(News, id=news_id)
+    
+    if request.method == 'POST':
+        news_item.delete()
+        messages.success(request, 'Новость успешно удалена!')
+        return redirect('admin_news')
+    
+    context = {'news': news_item}
+    return render(request, 'admin/news_delete.html', context)
+
+# News API ViewSet
+class NewsViewSet(viewsets.ModelViewSet):
+    queryset = News.objects.filter(is_published=True)
+    serializer_class = NewsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_serializer_class(self):
+        if self.action in ['list', 'retrieve']:
+            return NewsSerializer
+        return NewsSerializer
 
 
 # API

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from .models import User, Book, Category, Author, Publisher, Order, OrderItem, Cart, CartItem
+from .models import User, Book, Category, Author, Publisher, Order, OrderItem, Cart, CartItem, News
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,22 +18,16 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         fields = ['username', 'email', 'password', 'password_confirm', 
                  'first_name', 'last_name', 'phone']
 
-    def validate(self, data):
+def validate(self, data):
         if data['password'] != data['password_confirm']:
             raise serializers.ValidationError("Пароли не совпадают")
         return data
 
-    def create(self, validated_data):
-        validated_data.pop('password_confirm')
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', ''),
-            phone=validated_data.get('phone', '')
-        )
-        return user
+class NewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = ['id', 'title', 'slug', 'short_content', 'content', 
+                  'image', 'is_published', 'created_at', 'updated_at']
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

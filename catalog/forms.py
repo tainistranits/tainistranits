@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User, Book, Category, Author, Publisher, Order
+from .models import User, Book, Category, Author, Publisher, Order, News
 from django.utils.translation import gettext_lazy as _
 
 class UserProfileForm(forms.ModelForm):
@@ -41,6 +41,15 @@ class PublisherForm(forms.ModelForm):
         fields = ['name', 'address', 'website']
         widgets = {
             'address': forms.Textarea(attrs={'rows': 3}),
+        }
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['title', 'slug', 'short_content', 'content', 'image', 'is_published']
+        widgets = {
+            'short_content': forms.Textarea(attrs={'rows': 3}),
+            'content': forms.Textarea(attrs={'rows': 6}),
         }
 
 # forms.py

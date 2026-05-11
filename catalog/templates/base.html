@@ -225,6 +225,16 @@
                         <span>Главная</span>
                     </a>
 
+                    <a class="nav-link" href="{% url 'news_list' %}">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Новости</span>
+                    </a>
+
+                    <a class="nav-link" href="{% url 'contacts' %}">
+                        <i class="fas fa-address-book"></i>
+                        <span>Контакты</span>
+                    </a>
+
                     {% if user.is_admin %}
                     <a class="nav-link" href="{% url 'admin_statistics' %}">
                         <i class="fas fa-cog"></i>

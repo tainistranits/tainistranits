@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ news.title }} - Тайны страниц{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'news_list' %}">Новости</a></li>
+            <li class="breadcrumb-item active">{{ news.title|truncatewords:5 }}</li>
+        </ol>
+    </nav>
+    
+    <article class="news-detail">
+        <h1 class="mb-3">{{ news.title }}</h1>
+        
+        <div class="text-muted mb-4">
+            <i class="far fa-calendar-alt me-1"></i>
+            {{ news.created_at|date:"d.m.Y H:i" }}
+        </div>
+        
+        {% if news.image %}
+        <div class="text-center mb-4">
+            <img src="{{ news.image.url }}" class="img-fluid rounded" alt="{{ news.title }}" style="max-height: 500px;">
+        </div>
+        {% endif %}
+        
+        <div class="news-content">
+            {{ news.content|linebreaks }}
+        </div>
+        
+        <hr class="my-5">
+        
+        <div class="text-center">
+            <a href="{% url 'news_list' %}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Все новости
+            </a>
+        </div>
+    </article>
+</div>
+{% endblock %}

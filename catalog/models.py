@@ -297,3 +297,21 @@ class CartItem(models.Model):
 
     def total_price(self):
         return self.quantity * self.book.price
+
+class News(models.Model):
+    title = models.CharField(max_length=200, verbose_name="Заголовок")
+    slug = models.SlugField(max_length=200, unique=True, verbose_name="URL-имя")
+    short_content = models.TextField(verbose_name="Краткое описание")
+    content = models.TextField(verbose_name="Полное содержание")
+    image = models.ImageField(upload_to='news/', verbose_name="Изображение", null=True, blank=True)
+    is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+
+    class Meta:
+        verbose_name = "Новость"
+        verbose_name_plural = "Новости"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title

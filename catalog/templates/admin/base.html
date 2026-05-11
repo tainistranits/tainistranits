@@ -440,6 +440,12 @@
                     </a>
                 </li>
                 <li class="admin-nav-item">
+                    <a href="{% url 'admin_news' %}" class="admin-nav-link {% if '/admin/news/' in request.path %}active{% endif %}">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Новости</span>
+                    </a>
+                </li>
+                <li class="admin-nav-item">
                     <a href="{% url 'home' %}" class="admin-nav-link">
                         <i class="fas fa-home"></i>
                         <span>На сайт</span>

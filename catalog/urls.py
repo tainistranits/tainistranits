@@ -3,14 +3,19 @@ from django.contrib.auth import views as auth_views
 from . import views
 from .ai_views import AIRecommendationsAPIView
 from rest_framework.routers import DefaultRouter
+from .models import News
 
 router = DefaultRouter()
 router.register(r'cart', views.CartViewSet, basename='cart')
+router.register(r'news', views.NewsViewSet, basename='news')
 
 urlpatterns = [
     path('api/', include(router.urls)),
     # Публичные маршруты
     path('', views.home, name='home'),
+    path('contacts/', views.contacts, name='contacts'),
+    path('news/', views.news_list, name='news_list'),
+    path('news/<slug:slug>/', views.news_detail, name='news_detail'),
     path('books/', views.book_list, name='book_list'),
     path('books/<int:book_id>/', views.book_detail, name='book_detail'),
     path('category/<slug:slug>/', views.category_books, name='category_books'),
@@ -46,6 +51,10 @@ urlpatterns = [
     path('admin/publishers/<int:publisher_id>/delete/', views.admin_publisher_delete, name='admin_publisher_delete'),
     path('admin/authors/', views.admin_authors, name='admin_authors'),
     path('admin/publishers/', views.admin_publishers, name='admin_publishers'),
+    path('admin/news/', views.admin_news, name='admin_news'),
+    path('admin/news/create/', views.admin_news_create, name='admin_news_create'),
+    path('admin/news/<int:news_id>/', views.admin_news_detail, name='admin_news_detail'),
+    path('admin/news/<int:news_id>/delete/', views.admin_news_delete, name='admin_news_delete'),
 
     
 

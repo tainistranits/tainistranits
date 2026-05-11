@@ -1,0 +1,52 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Удаление новости - Админ-панель{% endblock %}
+
+{% block page_title %}Удаление новости{% endblock %}
+
+{% block page_actions %}
+<a href="{% url 'admin_news' %}" class="btn btn-outline-secondary">
+    <i class="fas fa-arrow-left me-1"></i>Назад
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="admin-card">
+            <div class="admin-card-header bg-danger">
+                <h5 class="mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Подтверждение удаления
+                </h5>
+            </div>
+            <div class="admin-card-body text-center">
+                <p class="lead">Вы уверены, что хотите удалить эту новость?</p>
+                
+                <div class="alert alert-warning">
+                    <h5 class="alert-heading">{{ news.title }}</h5>
+                    <p class="mb-0">{{ news.short_content|truncatewords:20 }}</p>
+                    <hr>
+                    <p class="mb-0 small">Дата создания: {{ news.created_at|date:"d.m.Y H:i" }}</p>
+                </div>
+                
+                <p class="text-danger">
+                    <i class="fas fa-exclamation-circle me-1"></i>
+                    Это действие нельзя отменить!
+                </p>
+                
+                <form method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>Удалить навсегда
+                    </button>
+                </form>
+                
+                <a href="{% url 'admin_news' %}" class="btn btn-outline-secondary ms-2">
+                    Отмена
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
